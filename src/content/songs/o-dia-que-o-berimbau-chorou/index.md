@@ -1,8 +1,10 @@
 ---
 creation-time: "2026-11-21T17:56:29.692Z"
 titles: ["O dia que o berimbau chorou"]
+hidden: false
 tags: [sao-bento]
 image: ./cover.jpg
+imageTall: ./tall.jpg
 imageAlt: "João Oliveira dos Santos (Mestre João Grande)"
 imageAltEn: "João Oliveira dos Santos (Mestre João Grande)"
 youtube: _C-hW0-pMAA
