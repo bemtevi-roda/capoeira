@@ -46,7 +46,7 @@ const tabs = [
 ---
 
 <!doctype html>
-<html lang={locale} dir="ltr">
+<html lang={locale} dir="ltr" data-language-preference={path !== undefined ? 'true' : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,16 +60,6 @@ const tabs = [
             <link rel="alternate" hreflang={l} href={new URL(translations[l], Astro.site)} />
           ))}
           <link rel="alternate" hreflang="x-default" href={new URL(translations[DEFAULT_LOCALE], Astro.site)} />
-          {/* Someone who picked a language in the menu lands in it when they come back from outside the site
-              (a bookmark, the home-screen app, a shared link). Browsing within the site never redirects. */}
-          <script is:inline define:vars={{ locale, translations }}>
-            try {
-              const wanted = localStorage.getItem('lang');
-              if (wanted && wanted !== locale && translations[wanted] && !document.referrer.startsWith(location.origin)) {
-                location.replace(translations[wanted] + location.search + location.hash);
-              }
-            } catch {}
-          </script>
         </>
       )
     }
@@ -128,6 +118,9 @@ const tabs = [
       </main>
     </div>
     <slot name="print" />
+    <script>
+      import '../scripts/language-preference';
+    </script>
   </body>
 </html>
 

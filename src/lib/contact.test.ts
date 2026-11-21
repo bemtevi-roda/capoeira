@@ -68,6 +68,7 @@ test('contactPayload sends only what applies to the topic', () => {
   assert.deepEqual(payload, {
     _subject: 'Capoeira songbook – Comment on a song: Paranauê – from Dana Levi (Pimenta)',
     _template: 'table',
+    _replyto: 'dana@example.com',
     Topic: 'Comment on a song',
     Name: 'Dana Levi',
     Nickname: 'Pimenta',

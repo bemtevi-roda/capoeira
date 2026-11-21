@@ -48,8 +48,7 @@ const { locale, links, samePage = false } = Astro.props;
 </details>
 
 <script>
-  /** Remembered so that opening the site later (bookmark, home-screen app) lands in this language; see Base.astro. */
-  const STORAGE_KEY = 'lang';
+  import { saveLanguagePreference, type StoredLocale } from '../lib/language-preference';
 
   for (const menu of document.querySelectorAll<HTMLDetailsElement>('[data-lang-menu]')) {
     document.addEventListener('click', (e) => {
@@ -62,9 +61,7 @@ const { locale, links, samePage = false } = Astro.props;
     });
     for (const link of menu.querySelectorAll<HTMLAnchorElement>('a[data-lang]')) {
       link.addEventListener('click', () => {
-        try {
-          localStorage.setItem(STORAGE_KEY, link.dataset.lang!);
-        } catch {}
+        saveLanguagePreference(localStorage, link.dataset.lang as StoredLocale);
         if (link.dataset.samePage) link.href = link.href.split(/[?#]/)[0] + location.search + location.hash;
       });
     }

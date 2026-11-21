@@ -88,6 +88,7 @@ export function contactPayload(
   const fields: Record<string, string | undefined> = {
     _subject: `Capoeira songbook – ${TOPIC_NAMES[topic]}${subjectDetail} – from ${sender}`,
     _template: 'table',
+    _replyto: input.email.trim(),
     Topic: TOPIC_NAMES[topic],
     Name: input.name.trim(),
     Nickname: input.nickname.trim(),
