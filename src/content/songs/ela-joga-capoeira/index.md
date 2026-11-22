@@ -9,11 +9,11 @@ imageAlt: "היא משחקת קפוארה"
 imageAltEn: "She plays capoeira"
 youtube: rwAaoe7fTb8
 lyrics: |
-  Na Lagoa do Abaete
+  Na Lagoa do Abaete x2
   Encontrei Dona Sinha
   Tava lavando o abada
   Ora meu Deus, pra dança no Candomblé
-  Ela joga capoeira
+  Ela joga capoeira x2
   também joga capoeira.
   Todos sabem como e
   joga homem e menino
@@ -21,7 +21,7 @@ lyrics: |
   Mestre Pastinha falou,
   e Mestre Bimba confirmou
   Todos podem aprender, general também doutor.
-  Sou mulher, Eu sou Maria
+  Sou mulher, Eu sou Maria x2
   Capoeira de valor
   Doze homems me chamavam,
   Ora meu Deus
