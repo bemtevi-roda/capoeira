@@ -172,6 +172,35 @@ const NAME_COLORS = ['coral', 'turquoise', 'orange', 'pink', 'lime', 'sky'];
     margin: 0 0 0.8em;
   }
 
+  .letter :global(.contact-link) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    margin-inline-start: 0.35em;
+    color: var(--ink);
+    vertical-align: middle;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    box-shadow: 2px 2px 0 var(--ink);
+    transition:
+      translate 0.12s ease,
+      box-shadow 0.12s ease;
+  }
+
+  .letter :global(.contact-link:hover),
+  .letter :global(.contact-link:active) {
+    translate: -1px -1px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+
+  .letter :global(.contact-link svg) {
+    width: 21px;
+    height: 21px;
+  }
+
   .cheer {
     width: fit-content;
     margin: 8px auto 4px !important;
