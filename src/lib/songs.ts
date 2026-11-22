@@ -24,6 +24,6 @@ export function tagUrl(tag: string, locale: Locale): string {
 
 /** The song's line-for-line translation into the page's language, if it has one. */
 export function translationOf(song: Song, locale: Locale): string | undefined {
-  const text = locale === 'he' ? song.data.hebrew : song.data.english;
+  const text = locale === 'he' ? song.data.hebrew : locale === 'en' ? song.data.english : undefined;
   return text?.trim() ? text : undefined;
 }

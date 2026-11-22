@@ -42,7 +42,8 @@ if (song.body?.trim()) {
   throw new Error(`${song.id}: put notes in the notesHebrew / notesEnglish fields, not after the closing ---`);
 }
 // plain text; a blank line starts a new paragraph
-const notes = (locale === 'he' ? song.data.notesHebrew : song.data.notesEnglish)?.trim().split(/\n\s*\n/) ?? [];
+const notesText = locale === 'he' ? song.data.notesHebrew : song.data.notesEnglish;
+const notes = notesText?.trim().split(/\n\s*\n/) ?? [];
 const hasNotes = notes.length > 0;
 // link previews crop to landscape, so they get the 4:3 crop when there is one
 const socialSource = getSongImage(song.id, song.data.imageWide) ?? image;

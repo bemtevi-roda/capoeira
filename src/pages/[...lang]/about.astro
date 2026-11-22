@@ -5,6 +5,7 @@ import bemtevi from '../../assets/bemtevi.jpg';
 import pandeiro from '../../assets/pandeiro.jpg';
 import { Content as WelcomeHe } from '../../content/welcome/he.md';
 import { Content as WelcomeEn } from '../../content/welcome/en.md';
+import { Content as WelcomePt } from '../../content/welcome/pt.md';
 import { LANGUAGES, localeParams, localePath, UI, type Locale } from '../../data/i18n';
 import { SITE, SITE_TEXT } from '../../data/site';
 
@@ -20,7 +21,7 @@ const { locale } = Astro.props;
 const t = UI[locale].about;
 const site = SITE_TEXT[locale];
 const dir = LANGUAGES[locale].dir;
-const Welcome = locale === 'he' ? WelcomeHe : WelcomeEn;
+const Welcome = locale === 'he' ? WelcomeHe : locale === 'en' ? WelcomeEn : WelcomePt;
 const NAME_COLORS = ['coral', 'turquoise', 'orange', 'pink', 'lime', 'sky'];
 ---
 
@@ -34,7 +35,7 @@ const NAME_COLORS = ['coral', 'turquoise', 'orange', 'pink', 'lime', 'sky'];
       </div>
       <Image
         src={bemtevi}
-        alt={locale === 'he' ? 'ציפור בנטווי צהובה' : 'A yellow bem-te-vi bird'}
+        alt={locale === 'he' ? 'ציפור בנטווי צהובה' : locale === 'en' ? 'A yellow bem-te-vi bird' : 'Um pássaro bem-te-vi amarelo'}
         width={360}
         class="hero-photo"
         loading="eager"

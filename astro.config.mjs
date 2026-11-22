@@ -43,8 +43,8 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/new-song/'),
-      // Hebrew pages have no prefix, English ones are under /en/ (see src/data/i18n.ts)
-      i18n: { defaultLocale: 'he', locales: { he: 'he-IL', en: 'en-US' } },
+      // Hebrew pages have no prefix; English and Portuguese are under /en/ and /pt/.
+      i18n: { defaultLocale: 'he', locales: { he: 'he-IL', en: 'en-US', pt: 'pt-BR' } },
     }),
     openAtBase(),
   ],

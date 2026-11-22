@@ -5,7 +5,7 @@ import { localePath } from '../data/i18n';
 ---
 
 <!-- GitHub Pages serves this one page for every missing address, in either language, so it speaks both. -->
-<Base locale="he" title="הדף לא נמצא · Page not found" noindex>
+<Base locale="he" title="דף לא נמצא · Page not found · Página não encontrada" noindex>
   <section class="card lost">
     <div class="art"><BerimbauArt broken /></div>
     <div dir="rtl" lang="he">
@@ -18,6 +18,12 @@ import { localePath } from '../data/i18n';
       <h2>Oops! This page wasn't found</h2>
       <p>Maybe the song has moved. Let's get back to the roda:</p>
       <a class="btn" href={`${localePath('en')}#songs`}>All songs</a>
+    </div>
+    <hr />
+    <div lang="pt-BR">
+      <h2>Ops! Esta página não foi encontrada</h2>
+      <p>Talvez a cantiga tenha mudado de lugar. Vamos voltar à roda:</p>
+      <a class="btn" href={`${localePath('pt')}#songs`}>Todas as cantigas</a>
     </div>
   </section>
 </Base>

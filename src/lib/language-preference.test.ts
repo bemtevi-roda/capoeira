@@ -11,6 +11,7 @@ import {
 test('language preference accepts only supported locales', () => {
   assert.equal(isStoredLocale('he'), true);
   assert.equal(isStoredLocale('en'), true);
+  assert.equal(isStoredLocale('pt'), true);
   assert.equal(isStoredLocale('fr'), false);
   assert.equal(isStoredLocale(null), false);
 });
@@ -42,6 +43,6 @@ test('language preference reads the legacy lang key', () => {
 });
 
 test('stored locale type covers the supported languages', () => {
-  const locales: StoredLocale[] = ['he', 'en'];
-  assert.deepEqual(locales, ['he', 'en']);
+  const locales: StoredLocale[] = ['he', 'en', 'pt'];
+  assert.deepEqual(locales, ['he', 'en', 'pt']);
 });

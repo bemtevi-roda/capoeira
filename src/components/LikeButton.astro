@@ -1,6 +1,6 @@
 ---
 /** Heart toggle that marks a song as liked on this device (see src/scripts/likes.ts). */
-import { UI, type Locale } from '../data/i18n';
+import { LANGUAGES, UI, type Locale } from '../data/i18n';
 
 interface Props {
   slug: string;
@@ -25,7 +25,7 @@ const t = UI[locale].like;
   data-like-added={t.added}
   data-like-removed={t.removed}
   data-like-title={title}
-  data-like-locale={locale}
+  data-like-locale={LANGUAGES[locale].lang}
   data-like={slug}
 >
   <svg viewBox="0 0 24 24" aria-hidden="true">

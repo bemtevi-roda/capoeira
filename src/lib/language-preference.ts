@@ -1,10 +1,10 @@
 export const LANGUAGE_PREFERENCE_KEY = 'preferredLocale';
 const LEGACY_LANGUAGE_PREFERENCE_KEY = 'lang';
 
-export type StoredLocale = 'he' | 'en';
+export type StoredLocale = 'he' | 'en' | 'pt';
 
 export function isStoredLocale(value: unknown): value is StoredLocale {
-  return value === 'he' || value === 'en';
+  return value === 'he' || value === 'en' || value === 'pt';
 }
 
 export function readLanguagePreference(storage: Pick<Storage, 'getItem'>): StoredLocale | undefined {

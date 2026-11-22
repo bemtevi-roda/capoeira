@@ -23,6 +23,8 @@ CI (`.github/workflows/ci.yml`) runs `npm test`, `npm run check`, `npm run build
 
 Test files import siblings **with the `.ts` extension** (`from './lyrics.ts'`) because they run under plain Node; code bundled by Vite/Astro imports without extensions.
 
+On this Windows machine, `npm` may not be on the PowerShell `PATH`. If so, check for the active fnm multishell wrapper at `%LOCALAPPDATA%\fnm_multishells\<session>\npm.ps1` and invoke it with `& '<full-path>\npm.ps1' run test`. A path that worked in one session was `C:\Users\Tabua\AppData\Local\fnm_multishells\20104_1795342353838\npm.ps1`; the session-specific folder can change, so verify it still exists before reuse.
+
 ## Architecture
 
 **Songs are an Astro content collection.** `src/content.config.ts` defines the `songs` collection: one folder per song at `src/content/songs/<slug>/index.md` (folder name = id = URL slug), with optional `cover.jpg` plus `wide.jpg` (4:3) / `tall.jpg` (4:5) crops alongside. All song data lives in YAML frontmatter; the Markdown body is unused (text after the closing `---` breaks the build). The Zod schema is the source of truth for fields — note `creation-time` (ISO datetime with offset) is required, though the README template omits it; it drives the home page's "newest" sort. `tags` must be keys of `TAGS` in `src/data/tags.ts`.

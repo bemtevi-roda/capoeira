@@ -1,6 +1,6 @@
 # Capoeira Songbook
 
-The Abadá-Capoeira Pardes Hanna songbook website, in Hebrew and English: every song has its Portuguese lyrics, line-by-line Hebrew and English translations (hover or tap a line), a YouTube recording, notes, and a print button that fits the lyrics onto one A4 page.
+The Abadá-Capoeira Pardes Hanna songbook website, with Hebrew, English, and Brazilian Portuguese interface text. Songs have Portuguese lyrics, line-by-line Hebrew and English translations (hover or tap a line), a YouTube recording, notes, and a print button that fits the lyrics onto one A4 page.
 
 **Live site:** https://bemtevi-roda.github.io/capoeira/
 
@@ -30,19 +30,19 @@ The site is built with [Astro](https://astro.build). Every change that reaches t
 | ------------------------------------ | ------------------------------------------------------------ |
 | `src/content/songs/<slug>/index.md`  | One folder per song: lyrics, translation, tags, video, notes |
 | `src/content/songs/<slug>/cover.jpg` | The song's picture (optional), with crops `wide.jpg`/`tall.jpg` |
-| `src/content/welcome/he.md`, `en.md` | The welcome letter on the About page, in each language       |
+| `src/content/welcome/`               | Welcome letters on the About page, in each language         |
 | `src/data/site.ts`                   | Site title, club and group names, thanks list, credits       |
 | `src/data/i18n.ts`                   | The languages, and all button/label text in each language    |
-| `src/pages/[...lang]/`               | Pages built in both languages (home, About, song pages)      |
+| `src/pages/[...lang]/`               | Pages built in all three interface languages                 |
 | `src/data/tags.ts`                   | The list of allowed tags (Benguela, São Bento, …)            |
 | `src/styles/tokens.css`              | Colours and fonts                                            |
 | `.github/workflows/deploy.yml`       | Publishes the site when `main` changes                       |
 | `.github/workflows/ci.yml`           | Checks every pull request                                    |
 | `docs/typos-*.csv`                   | Suspected typos in the imported lyrics, waiting for review   |
 
-The folder name of a song (`<slug>`) is its web address: `src/content/songs/marinheiro-so/` becomes `…/capoeira/songs/marinheiro-so/` in Hebrew and `…/capoeira/en/songs/marinheiro-so/` in English.
+The folder name of a song (`<slug>`) is its web address: `src/content/songs/marinheiro-so/` becomes `…/capoeira/songs/marinheiro-so/` in Hebrew, `…/capoeira/en/songs/marinheiro-so/` in English, and `…/capoeira/pt/songs/marinheiro-so/` in Portuguese.
 
-**Languages:** Hebrew pages are at the site root, English pages under `/en/`. The language menu in the header switches between them and remembers the choice: opening the site later (a bookmark, the home-screen app, a shared link) lands in that language. The page layout is left-to-right in both languages; Hebrew text blocks are right-to-left inside their boxes. The "Add a song" pages are in English only.
+**Languages:** Hebrew pages are at the site root, English pages under `/en/`, and Brazilian Portuguese pages under `/pt/`. The language menu switches between them and remembers the choice. Song lyrics remain in Portuguese; their available line-by-line translations are Hebrew and English. The "Add a song" pages are in English only.
 
 ---
 
@@ -189,9 +189,9 @@ If a song has no translation in a language, its page in that language simply sho
 2. Add a line inside `TAGS`, e.g. `angola: { label: 'Angola', color: 'pink' },`. The key (`angola`) is what songs use in `tags:`; `label` is what visitors see; `color` is one of `coral`, `turquoise`, `yellow`, `pink`, `lime`, `orange`, `sky`, `green`, `blue`.
 3. Use it in songs: `tags: [angola]`. The home page gets a filter button for it automatically.
 
-**Edit the About page** — the welcome letter is `src/content/welcome/he.md` (Hebrew) and `src/content/welcome/en.md` (English); the title, club, group, thanks names and credits are in `src/data/site.ts`, in both languages. `createdBy` there is the credit printed at the bottom of every song sheet.
+**Edit the About page** — the welcome letters are in `src/content/welcome/`; the title, club, group, thanks names and credits are in `src/data/site.ts`, in each interface language. `createdBy` there is the credit printed at the bottom of every song sheet.
 
-**Change a button or label** — all interface text is in `src/data/i18n.ts`, once per language.
+**Change a button or label** — interface text is in `src/data/i18n.ts`, once per language.
 
 **Change colours or fonts** — `src/styles/tokens.css`.
 

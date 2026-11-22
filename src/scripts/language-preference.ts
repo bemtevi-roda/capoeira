@@ -5,7 +5,7 @@ import {
   type StoredLocale,
 } from '../lib/language-preference';
 
-const current = document.documentElement.lang;
+const current = document.documentElement.dataset.locale;
 if (isStoredLocale(current) && document.documentElement.dataset.languagePreference === 'true') {
   const remembered = readLanguagePreference(localStorage);
   if (!remembered) {

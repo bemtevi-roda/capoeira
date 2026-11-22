@@ -34,7 +34,7 @@ const { titles, stanzas, locale } = Astro.props;
   <footer class="print-footer">
     <img class="print-icon" src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" width="38" height="38" />
     <div>
-      <div class="print-credit" lang={locale} dir="auto">{SITE_TEXT[locale].createdBy}</div>
+      <div class="print-credit" lang="en" dir="ltr">{SITE_TEXT[locale].createdBy}</div>
       <div class="print-url">{siteAddress()}</div>
     </div>
   </footer>

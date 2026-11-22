@@ -15,8 +15,8 @@ interface Props {
   locale: Locale;
   /**
    * This page's address relative to the site root, the same in every language ('' for home, 'about/', 'songs/x/').
-   * Pages without one (the English-only "Add a song" pages, the 404 page) aren't translated: the language menu
-   * then links to each language's home page.
+   * Pages without one (the English-only "Add a song" pages and the shared 404 page) have no same-page translations:
+   * the language menu then links to each language's home page.
    */
   path?: string;
   /** Which header tab to highlight. */
@@ -46,7 +46,7 @@ const tabs = [
 ---
 
 <!doctype html>
-<html lang={locale} dir="ltr" data-language-preference={path !== undefined ? 'true' : undefined}>
+<html lang={LANGUAGES[locale].lang} dir="ltr" data-locale={locale} data-language-preference={path !== undefined ? 'true' : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -57,7 +57,7 @@ const tabs = [
       path !== undefined && (
         <>
           {LOCALES.map((l) => (
-            <link rel="alternate" hreflang={l} href={new URL(translations[l], Astro.site)} />
+            <link rel="alternate" hreflang={LANGUAGES[l].lang} href={new URL(translations[l], Astro.site)} />
           ))}
           <link rel="alternate" hreflang="x-default" href={new URL(translations[DEFAULT_LOCALE], Astro.site)} />
         </>
@@ -65,7 +65,7 @@ const tabs = [
     }
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
     <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
-    <link rel="manifest" href={`${base}manifest.json`} />
+    <link rel="manifest" href={`${base}${locale === 'he' ? 'manifest.json' : `manifest-${locale}.json`}`} />
     <link rel="sitemap" href={`${base}sitemap-index.xml`} />
     <meta name="theme-color" content="#87ceeb" />
     <meta name="apple-mobile-web-app-title" content={site.shortTitle} />

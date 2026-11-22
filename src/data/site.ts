@@ -29,7 +29,7 @@ export const SITE_TEXT = {
     siteThanksOutro: 'שעזרו בבנייה ותחזוקה של האתר',
     credit: 'נוצר על ידי:',
     /** Printed at the bottom of every song sheet. */
-    createdBy: 'נוצר על ידי Bemtevi',
+    createdBy: 'Created by: Bem-te-vi',
     
   },
   en: {
@@ -45,7 +45,23 @@ export const SITE_TEXT = {
     siteThanksJoiner: ' and ',
     siteThanksOutro: 'for helping build and maintain the site',
     credit: 'Created by:',
-    createdBy: 'Created by: Bemtevi',
+    createdBy: 'Created by: Bem-te-vi',
+  },
+  pt: {
+    title: 'Cancioneiro de Capoeira Abadá',
+    shortTitle: 'Cantigas de Capoeira',
+    description: 'Cantigas de capoeira em português, com traduções para inglês e hebraico, apresentações no YouTube e páginas para impressão.',
+    club: 'Clube de Pardes Hanna, Professora Harpa',
+    group: 'Grupo de quarta-feira, orientado pela Graduada Quitute',
+    thanksIntro: 'Agradecemos a todos que nos ensinaram a cantar e tocar:',
+    thanks: ['Arpa', 'Groselha', 'Polenta', 'Pimenta', 'Chama', 'Mamute'],
+    siteThanksIntro: 'Agradecemos a',
+    siteThanks: ['Lince', 'Pendelo'],
+    siteThanksJoiner: ' e ',
+    siteThanksOutro: ' por ajudarem a construir e manter o site',
+    credit: 'Criado por:',
+    /** Printed at the bottom of every song sheet. */
+    createdBy: 'Created by: Bem-te-vi',
   },
 } satisfies Record<Locale, Record<string, string | string[]>>;
 

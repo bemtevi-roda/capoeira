@@ -1,19 +1,20 @@
 /**
- * The site's languages. Hebrew lives at the site root (…/capoeira/), English under …/capoeira/en/.
- * Pages that exist in both languages are built twice from one template in src/pages/[...lang]/.
+ * The site's languages. Hebrew lives at the site root; English and Portuguese use /en/ and /pt/.
+ * Pages in all three interface languages are built from one template in src/pages/[...lang]/.
  * Site-wide names and the thanks list are in src/data/site.ts; the About letter is src/content/welcome/<locale>.md.
  */
-export const LOCALES = ['he', 'en'] as const;
+export const LOCALES = ['he', 'en', 'pt'] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'he';
 
 export const LANGUAGES = {
   /** `label` is what the language menu shows; `dir` is the direction of prose (the page layout stays left-to-right). */
-  he: { label: 'עברית', dir: 'rtl', ogLocale: 'he_IL' },
-  en: { label: 'EN', dir: 'ltr', ogLocale: 'en_US' },
-} as const satisfies Record<Locale, { label: string; dir: 'rtl' | 'ltr'; ogLocale: string }>;
+  he: { label: 'עברית', lang: 'he', dir: 'rtl', ogLocale: 'he_IL' },
+  en: { label: 'EN', lang: 'en', dir: 'ltr', ogLocale: 'en_US' },
+  pt: { label: 'Português', lang: 'pt-BR', dir: 'ltr', ogLocale: 'pt_BR' },
+} as const satisfies Record<Locale, { label: string; lang: string; dir: 'rtl' | 'ltr'; ogLocale: string }>;
 
-/** `getStaticPaths` entries for a `[...lang]` route: Hebrew has no prefix, the others do. */
+/** `getStaticPaths` entries for a `[...lang]` route: Hebrew has no prefix; English and Portuguese do. */
 export function localeParams() {
   return LOCALES.map((locale) => ({ params: { lang: locale === DEFAULT_LOCALE ? undefined : locale }, locale }));
 }
@@ -254,7 +255,7 @@ const en: typeof he = {
     shareTitle: 'Share',
     tipTitle: 'Don’t see an install option?',
     tip: 'Make sure you’re using Safari on iPhone or Chrome on Android. Menu labels may vary slightly by device.',
-    appIconLabel: 'שירי קפואירה',
+    appIconLabel: 'Capoeira Songs',
     appInstalled: 'Congratulations! The app is installed. Look for the turquoise berimbau icon on your phone.',
     backToAbout: 'Back to About',
     backToSongs: 'Back to Songs',
@@ -299,4 +300,142 @@ const en: typeof he = {
   },
 };
 
-export const UI = { he, en } satisfies Record<Locale, typeof he>;
+const pt: typeof he = {
+  skipLink: 'Pular para o conteúdo',
+  nav: { label: 'Navegação principal', songs: 'Cantigas', about: 'Sobre', contact: 'Contato' },
+  language: 'Idioma',
+  home: {
+    title: 'Cantigas',
+    searchLabel: 'Buscar cantigas',
+    searchPlaceholder: 'Buscar',
+    filterByTag: 'Filtrar e ordenar cantigas',
+    whatsNew: 'Novidades',
+    sortByCreationTime: 'Ordenar cantigas por data',
+    filterTagHints: {
+      benguela: 'Mostrar apenas cantigas de Benguela',
+      'sao-bento': 'Mostrar apenas cantigas de São Bento',
+    },
+    filterResultLabels: {
+      benguela: 'Benguela',
+      'sao-bento': 'São Bento',
+    },
+    sortResultLabel: 'Ordenadas por data de inclusão',
+    defaultSortLabel: 'Ordenadas de A a Z',
+    liked: 'Favoritas',
+    likedHint: 'Mostrar suas cantigas favoritas',
+    likedResultLabel: 'Favoritas',
+    noLiked: 'Você ainda não tem cantigas favoritas neste dispositivo. Toque no coração ♡ de uma cantiga para adicioná-la.',
+    likedLocalNote: 'As favoritas ficam salvas apenas neste dispositivo e não são sincronizadas.',
+    noLikedMatches: 'Nenhuma favorita corresponde a estes filtros. Altere ou limpe os filtros.',
+    upcomingMaculele: 'Maculelê',
+    upcomingMaculeleHint: 'Em breve, novas cantigas de Maculelê',
+    countOne: '1 cantiga',
+    /** `{n}` is replaced by the number of songs shown. */
+    countMany: '{n} cantigas',
+    noResults: 'Não encontramos essa cantiga. Tente outra palavra ou limpe o filtro.',
+    keepPlaying: 'Qual cantiga vamos cantar agora?',
+    backToTop: 'Voltar ao início',
+    installApp: 'Como instalar o aplicativo',
+  },
+  like: {
+    add: 'Adicionar às favoritas',
+    remove: 'Remover das favoritas',
+    added: 'Adicionada às favoritas',
+    removed: 'Removida das favoritas',
+  },
+  card: {
+    video: '▶ Vídeo',
+    videoHint: 'Há uma apresentação no YouTube',
+    translation: 'Tradução',
+    translationHint: 'Há uma tradução para português',
+  },
+  song: {
+    aka: 'Também conhecida como',
+    tags: 'Estilos',
+    lyrics: 'Letra',
+    translation: 'Tradução',
+    translationHint: 'Mostrar a tradução para português abaixo de cada verso',
+    print: 'Imprimir',
+    printHint: 'Somente a letra, em uma página A4',
+    notes: 'Observações',
+    moreSongs: 'Mais cantigas',
+    allSongs: 'Todas as cantigas',
+    times: (n: number) => `${n} vezes`,
+    playVideo: 'Reproduzir a apresentação no YouTube',
+  },
+  about: {
+    title: 'Sobre',
+    thanks: 'Agradecimentos!',
+    adminTitle: 'Área administrativa',
+    adminDescription: 'Adicionar cantigas e editar o conteúdo do site',
+    installApp: 'Como instalar o aplicativo',
+    backToSongs: 'Voltar às cantigas',
+  },
+  install: {
+    title: 'Instalar o aplicativo de cantigas',
+    intro: 'Adicione o cancioneiro à tela inicial do celular para acessá-lo como um aplicativo.',
+    androidTitle: 'Android',
+    androidSteps: [
+      'Abra esta página no Chrome.',
+      'Toque no menu (⋮).',
+      'Role o menu para baixo e toque em “Instalar e criar atalho”.',
+      'Escolha “Aplicativo” (não “Criar atalho”) e toque em “Instalar” para concluir.',
+    ],
+    androidMenuOption: 'Instalar e criar atalho',
+    iosTitle: 'iPhone ou iPad',
+    iosSteps: [
+      'Abra esta página no Safari.',
+      'Toque no botão Compartilhar (o quadrado com uma seta para cima).',
+      'Role para baixo e toque em “Adicionar à Tela de Início”.',
+      'Toque em “Adicionar”.',
+    ],
+    iosMenuOption: 'Adicionar à Tela de Início',
+    shareTitle: 'Compartilhar',
+    tipTitle: 'A opção de instalação não aparece?',
+    tip: 'Confira se está usando o Safari no iPhone ou o Chrome no Android. Os nomes das opções podem variar um pouco conforme o dispositivo.',
+    appIconLabel: 'Cantigas de Capoeira',
+    appInstalled: 'Parabéns! O aplicativo foi instalado. Procure no celular o ícone turquesa com o berimbau.',
+    backToAbout: 'Voltar à página Sobre',
+    backToSongs: 'Voltar às cantigas',
+  },
+  contact: {
+    title: 'Entre em contato',
+    intro: 'Quer sugerir uma cantiga, corrigir algo ou simplesmente dizer olá? Escreva para nós.',
+    aboutYou: 'Seus dados',
+    name: 'Nome',
+    nickname: 'Apelido na capoeira',
+    nicknameHint: 'se tiver',
+    email: 'E-mail',
+    phone: 'Telefone',
+    optional: 'opcional',
+    topic: 'Assunto',
+    topics: {
+      'new-song': 'Adicionar uma cantiga',
+      'song-comment': 'Comentário sobre uma cantiga',
+      general: 'Comentário geral',
+    },
+    songName: 'Nome da cantiga',
+    youtube: 'Link do YouTube',
+    tags: 'Estilos',
+    song: 'Escolha uma cantiga da lista ou digite o nome',
+    songPlaceholder: 'Digite o nome da cantiga…',
+    songSearchEmpty: 'Nenhuma cantiga corresponde à busca.',
+    showAllSongs: 'Mostrar todas as cantigas',
+    message: 'Mensagem',
+    send: 'Enviar',
+    sending: 'Enviando…',
+    errors: {
+      required: 'Preencha este campo',
+      email: 'O endereço de e-mail parece inválido',
+      phone: 'O número de telefone parece inválido',
+      youtube: 'Este link do YouTube parece inválido',
+    },
+    fixErrors: 'Alguns campos precisam ser corrigidos; eles estão marcados em vermelho.',
+    sendFailed: 'Não foi possível enviar a mensagem. Verifique sua conexão com a internet e tente novamente.',
+    sentTitle: 'Obrigado, sua mensagem foi enviada!',
+    sentText: 'Responderemos em breve.',
+    backToRoda: 'Voltar à roda',
+  },
+};
+
+export const UI = { he, en, pt } satisfies Record<Locale, typeof he>;
