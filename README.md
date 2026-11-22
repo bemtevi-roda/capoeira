@@ -105,7 +105,7 @@ Then:
 
    ```yaml
    ---
-   titles: ["Paranauê", "Paraná ê"] # first = main title; the others are alternative names
+   titles: ["Paranauê", "Paraná ê"] # first = main title; the others are alternative names (searchable, shown on the homepage and song page)
    tags: [sao-bento] # must exist in src/data/tags.ts
    image: ./cover.jpg # optional — delete this line if there's no picture
    imageWide: ./wide.jpg # optional 4:3 crop of the picture (see step 4)

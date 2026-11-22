@@ -2,10 +2,8 @@
 import { getImage } from 'astro:assets';
 import type { Locale } from '../data/i18n';
 import { TAGS } from '../data/tags';
-import { firstLine } from '../lib/lyrics';
 import { songUrl, type Song } from '../lib/songs';
 import { getSongImage } from '../lib/song-images';
-import { fold } from '../lib/text';
 
 interface Props {
   song: Song;
@@ -13,7 +11,7 @@ interface Props {
 }
 
 const { song, locale } = Astro.props;
-const { titles, tags, lyrics } = song.data;
+const { titles, tags } = song.data;
 const image = getSongImage(song.id, song.data.image);
 const imageWide = getSongImage(song.id, song.data.imageWide);
 const imageTall = getSongImage(song.id, song.data.imageTall);
@@ -31,8 +29,6 @@ if (wideSource && tallSource) {
     tall = undefined;
   }
 }
-const opening = firstLine(lyrics);
-const showOpening = opening && !titles.some((t) => fold(t) === fold(opening));
 ---
 
 <a class="song-card" href={songUrl(song, locale)}>
@@ -68,7 +64,6 @@ const showOpening = opening && !titles.some((t) => fold(t) === fold(opening));
   <div class="body">
     <h3 class="pt-text" lang="pt-BR">{titles[0]}</h3>
     {titles.length > 1 && <p class="aka pt-text" lang="pt-BR">{titles.slice(1).join(' · ')}</p>}
-    {showOpening && <p class="opening pt-text" lang="pt-BR">“{opening}”</p>}
     <div class="meta">
       {
         tags.map((tag) => (
@@ -143,15 +138,9 @@ const showOpening = opening && !titles.some((t) => fold(t) === fold(opening));
     font-size: 1.4rem;
   }
 
-  .aka,
-  .opening {
+  .aka {
     margin: 0;
     font-size: 0.95rem;
-  }
-
-  .opening {
-    font-style: italic;
-    opacity: 0.8;
   }
 
   .meta {
@@ -190,8 +179,7 @@ const showOpening = opening && !titles.some((t) => fold(t) === fold(opening));
       font-size: 1.2rem;
     }
 
-    .aka,
-    .opening {
+    .aka {
       font-size: 0.88rem;
     }
 

@@ -1,10 +1,12 @@
 ---
 creation-time: "2026-11-22T08:53:20.861Z"
 titles: ["Ela joga capoeira","Aqua de beber camara"]
+hidden: false
 tags: [benguela]
 image: ./cover.jpg
+imageTall: ./tall.jpg
 imageAlt: "היא משחקת קפוארה"
-imageAltEn: "Ela joga capoeira"
+imageAltEn: "She plays capoeira"
 youtube: rwAaoe7fTb8
 lyrics: |
   Na Lagoa do Abaete
