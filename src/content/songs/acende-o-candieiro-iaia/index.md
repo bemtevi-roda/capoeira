@@ -1,6 +1,6 @@
 ---
 creation-time: "2026-11-17T17:09:04+02:00"
-titles: ["Acende o cndieiro, Iaiá"]
+titles: ["Acende o candieiro, Iaiá"]
 hidden: false
 tags: [benguela]
 image: ./cover.jpg
