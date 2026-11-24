@@ -77,6 +77,9 @@ const he = {
   song: {
     aka: 'ידוע גם בשם',
     tags: 'תגיות',
+    share: 'שיתוף השיר',
+    shareCopied: 'הקישור הועתק',
+    shareFailed: 'לא הצלחנו לשתף את הקישור',
     lyrics: 'מילות השיר',
     translation: 'תרגום',
     translationHint: 'הצגת התרגום לעברית מתחת לכל שורה',
@@ -214,6 +217,9 @@ const en: typeof he = {
   song: {
     aka: 'Also known as',
     tags: 'Tags',
+    share: 'Share song',
+    shareCopied: 'Link copied',
+    shareFailed: 'Could not share the link',
     lyrics: 'Lyrics',
     translation: 'Translation',
     translationHint: 'Show the English translation under each line',
@@ -352,6 +358,9 @@ const pt: typeof he = {
   song: {
     aka: 'Também conhecida como',
     tags: 'Estilos',
+    share: 'Compartilhar cantiga',
+    shareCopied: 'Link copiado',
+    shareFailed: 'Não foi possível compartilhar o link',
     lyrics: 'Letra',
     translation: 'Tradução',
     translationHint: 'Mostrar a tradução para português abaixo de cada verso',

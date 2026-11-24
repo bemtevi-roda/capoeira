@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { getImage, Picture } from 'astro:assets';
 import Base from '../../../layouts/Base.astro';
 import LikeButton from '../../../components/LikeButton.astro';
+import ShareButton from '../../../components/ShareButton.astro';
 import Lyrics from '../../../components/Lyrics.astro';
 import PrintSheet from '../../../components/PrintSheet.astro';
 import YouTube from '../../../components/YouTube.astro';
@@ -33,6 +34,7 @@ interface Props {
 const { locale, song, index, prev, next } = Astro.props;
 const t = UI[locale].song;
 const dir = LANGUAGES[locale].dir;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const { titles, tags, youtube, youtubeStart, lyrics } = song.data;
 const image = getSongImage(song.id, song.data.image);
 const imageAlt = locale === 'he' ? song.data.imageAlt : song.data.imageAltEn;
@@ -91,6 +93,7 @@ if (socialSource) {
             )
           }
           <LikeButton slug={song.id} title={titles[0]} locale={locale} size="large" />
+          <ShareButton title={titles[0]} url={canonicalUrl} locale={locale} />
         </div>
       </div>
       <figure class="photo">

@@ -1,0 +1,100 @@
+---
+import { UI, type Locale } from '../data/i18n';
+
+interface Props {
+  title: string;
+  url: string;
+  locale: Locale;
+}
+
+const { title, url, locale } = Astro.props;
+const t = UI[locale].song;
+---
+
+<button
+  type="button"
+  class="share"
+  aria-label={t.share}
+  title={t.share}
+  data-share
+  data-share-title={title}
+  data-share-url={url}
+  data-share-copied={t.shareCopied}
+  data-share-failed={t.shareFailed}
+  data-share-locale={locale}
+>
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 15V3m0 0L8 7m4-4 4 4M5 12v8h14v-8"></path>
+  </svg>
+</button>
+
+<script>
+  import { initShareButtons } from '../scripts/share';
+  initShareButtons();
+</script>
+
+<style>
+  .share {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    color: var(--ink);
+    background: none;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .share svg {
+    width: 72%;
+    height: 72%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: scale 0.12s ease;
+  }
+
+  .share:hover svg {
+    scale: 1.12;
+  }
+
+  .share:active svg {
+    scale: 0.92;
+  }
+
+  .share:disabled {
+    cursor: wait;
+  }
+
+  :global(.share-feedback) {
+    position: fixed;
+    z-index: 1000;
+    max-width: calc(100vw - 32px);
+    padding: 8px 16px;
+    color: var(--paper);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+    background: var(--ink);
+    border: var(--border);
+    border-radius: 999px;
+    box-shadow: var(--shadow-sm);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -4px);
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  :global(.share-feedback[data-visible='true']) {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+</style>
