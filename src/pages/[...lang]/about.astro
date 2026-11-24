@@ -58,12 +58,20 @@ const NAME_COLORS = ['coral', 'turquoise', 'orange', 'pink', 'lime', 'sky'];
         {site.siteThanks.map((name, i) => (
           <>
             {i > 0 && site.siteThanksJoiner}
-            <strong class="name-pill" style="--c:var(--coral)">{name}</strong>
+            <strong class="name-pill" style={`--c:var(--${i === 1 ? 'blue' : 'green'})`}>{name}</strong>
           </>
         ))}
         {site.siteThanksOutro}
       </p>
       <p class="site-thanks site-credit">
+        <img
+          class="credit-logo"
+          src={`${import.meta.env.BASE_URL}logo-blue-bg.svg`}
+          alt=""
+          width="64"
+          height="64"
+          loading="lazy"
+        />
         {site.credit}<strong class="name-pill">Bem-te-vi</strong>
       </p>
     </section>
@@ -285,6 +293,14 @@ const NAME_COLORS = ['coral', 'turquoise', 'orange', 'pink', 'lime', 'sky'];
     margin-top: 48px;
   }
 
+  .credit-logo {
+    display: inline-block;
+    width: 2.07em;
+    height: 2.07em;
+    margin-inline-end: 0.25em;
+    vertical-align: middle;
+  }
+
   .site-thanks .name-pill {
     display: inline-flex;
     align-items: center;
@@ -292,7 +308,7 @@ const NAME_COLORS = ['coral', 'turquoise', 'orange', 'pink', 'lime', 'sky'];
     margin-inline: 0.5ch;
     padding: 2px 14px;
     font-weight: 600;
-    background: var(--green);
+    background: var(--c);
     border: 2px solid var(--ink);
     border-radius: 999px;
     box-shadow: 2px 2px 0 var(--ink);
