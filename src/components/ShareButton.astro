@@ -9,24 +9,60 @@ interface Props {
 
 const { title, url, locale } = Astro.props;
 const t = UI[locale].song;
+const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`;
 ---
 
-<button
-  type="button"
-  class="share"
-  aria-label={t.share}
-  title={t.share}
-  data-share
-  data-share-title={title}
-  data-share-url={url}
-  data-share-copied={t.shareCopied}
-  data-share-failed={t.shareFailed}
-  data-share-locale={locale}
->
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M12 15V3m0 0L8 7m4-4 4 4M5 12v8h14v-8"></path>
-  </svg>
-</button>
+<div class="share-control" data-share-control>
+  <button
+    type="button"
+    class="share"
+    aria-label={t.share}
+    title={t.share}
+    aria-expanded="false"
+    aria-controls="share-options"
+    data-share-locale={locale}
+    data-share-toggle
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M8.2 4H5.5a3 3 0 0 0-3 3v11a3 3 0 0 0 3 3h11a3 3 0 0 0 3-3v-3.5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+      <path
+        d="M7.6 18.3c-1.1-3.6-1-7.5 1.3-9.9 2.3-2.4 5.3-3.2 8.5-3V2.8c0-1 1.2-1.5 1.9-.8l4.3 4.3c.6.6.6 1.5 0 2.1l-4.3 4.3c-.7.7-1.9.2-1.9-.8V9.2c-2.5-.2-4.5.4-5.8 1.8-1.6 1.7-1.8 4.4-1.3 7.3Z"
+        fill="currentColor"
+        stroke="none"
+      ></path>
+    </svg>
+  </button>
+  <div class="share-options" id="share-options" role="group" aria-label={t.share} dir={locale === 'he' ? 'rtl' : 'ltr'} hidden>
+    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-share-whatsapp>{t.shareWhatsApp}</a>
+    <button
+      type="button"
+      data-share-copy
+      data-share-url={url}
+      data-share-copied={t.shareCopied}
+      data-share-failed={t.shareFailed}
+    >
+      {t.shareCopyLink}
+    </button>
+    <button
+      type="button"
+      data-share-native
+      data-share-title={title}
+      data-share-url={url}
+      data-share-failed={t.shareFailed}
+      data-share-locale={locale}
+      hidden
+    >
+      {t.shareMore}
+    </button>
+  </div>
+</div>
 
 <script>
   import { initShareButtons } from '../scripts/share';
@@ -34,10 +70,16 @@ const t = UI[locale].song;
 </script>
 
 <style>
+  .share-control {
+    position: relative;
+    flex: none;
+    width: 52px;
+    height: 52px;
+  }
+
   .share {
     display: grid;
     place-items: center;
-    flex: none;
     width: 52px;
     height: 52px;
     padding: 0;
@@ -69,6 +111,49 @@ const t = UI[locale].song;
 
   .share:disabled {
     cursor: wait;
+  }
+
+  .share-options {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 6px);
+    inset-inline-start: 0;
+    display: grid;
+    width: max-content;
+    min-width: 190px;
+    padding: 6px;
+    background: var(--paper);
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .share-options[hidden] {
+    display: none;
+  }
+
+  .share-options [hidden] {
+    display: none;
+  }
+
+  .share-options a,
+  .share-options button {
+    display: block;
+    padding: 8px 12px;
+    color: var(--ink);
+    font: inherit;
+    text-align: start;
+    text-decoration: none;
+    white-space: nowrap;
+    background: none;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .share-options a:hover,
+  .share-options button:hover {
+    background: var(--sky-soft);
   }
 
   :global(.share-feedback) {

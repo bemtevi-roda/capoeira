@@ -26,37 +26,65 @@ function showFeedback(button: HTMLButtonElement, text: string): void {
   feedbackTimer = window.setTimeout(() => feedback?.removeAttribute('data-visible'), 2200);
 }
 
-async function share(button: HTMLButtonElement): Promise<void> {
-  const title = button.dataset.shareTitle!;
-  const url = button.dataset.shareUrl!;
-
-  try {
-    if (navigator.share) {
-      try {
-        await navigator.share({ title, url });
-        return;
-      } catch (error) {
-        if (error instanceof Error && error.name === 'AbortError') return;
-        console.error('Share page:', error);
-      }
-    }
-
-    await navigator.clipboard.writeText(url);
-    showFeedback(button, button.dataset.shareCopied!);
-  } catch (error) {
-    console.error('Copy share link:', error);
-    showFeedback(button, button.dataset.shareFailed!);
-  }
-}
-
 /** Wires the share button on each song page. */
 export function initShareButtons(): void {
-  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-share]')) {
-    button.addEventListener('click', () => {
-      button.disabled = true;
-      void share(button).finally(() => {
-        button.disabled = false;
-      });
+  for (const control of document.querySelectorAll<HTMLElement>('[data-share-control]')) {
+    const toggle = control.querySelector<HTMLButtonElement>('[data-share-toggle]')!;
+    const options = control.querySelector<HTMLElement>('.share-options')!;
+    const copyButton = control.querySelector<HTMLButtonElement>('[data-share-copy]')!;
+    const nativeButton = control.querySelector<HTMLButtonElement>('[data-share-native]')!;
+    const whatsappLink = control.querySelector<HTMLAnchorElement>('[data-share-whatsapp]')!;
+    nativeButton.hidden = typeof navigator.share !== 'function';
+
+    const close = () => {
+      options.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+
+    toggle.addEventListener('click', () => {
+      options.hidden = !options.hidden;
+      toggle.setAttribute('aria-expanded', String(!options.hidden));
+    });
+
+    whatsappLink.addEventListener('click', close);
+
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(copyButton.dataset.shareUrl!);
+        showFeedback(toggle, copyButton.dataset.shareCopied!);
+      } catch (error) {
+        console.error('Copy share link:', error);
+        showFeedback(toggle, copyButton.dataset.shareFailed!);
+      } finally {
+        close();
+      }
+    });
+
+    nativeButton.addEventListener('click', async () => {
+      try {
+        await navigator.share({
+          title: nativeButton.dataset.shareTitle!,
+          url: nativeButton.dataset.shareUrl!,
+        });
+      } catch (error) {
+        if (!(error instanceof Error && error.name === 'AbortError')) {
+          console.error('Share page:', error);
+          showFeedback(toggle, nativeButton.dataset.shareFailed!);
+        }
+      } finally {
+        close();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!control.contains(event.target as Node)) close();
+    });
+
+    control.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !options.hidden) {
+        close();
+        toggle.focus();
+      }
     });
   }
 }
